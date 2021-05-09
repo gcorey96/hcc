@@ -3018,8 +3018,14 @@ private:
         std::vector<hsa_agent_t>* pAgents = nullptr;
 
         if (data == nullptr) {
+            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+            printf("DATA is NULL\n");
+            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
             return HSA_STATUS_ERROR_INVALID_ARGUMENT;
         } else {
+            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+            printf("Making pAgent\n");
+            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
             pAgents = static_cast<std::vector<hsa_agent_t>*>(data);
         }
 
@@ -3029,6 +3035,9 @@ private:
         }
 
         if (DBFLAG(DB_INIT)) {
+            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+            printf("DB FLAG is INIT\n");
+            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
             char name[64];
             uint32_t node = 0;
             status = hsa_agent_get_info(agent, HSA_AGENT_INFO_NAME, name);
@@ -3044,6 +3053,9 @@ private:
             }
         }
 
+        printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+        printf("%d, %d\n", device_type, HSA_DEVICE_TYPE_GPU);
+        printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
         if (device_type == HSA_DEVICE_TYPE_GPU)  {
             pAgents->push_back(agent);
         }
@@ -3091,6 +3103,9 @@ public:
         // Iterate over the agents to find out gpu device
         std::vector<hsa_agent_t> agents;
         status = hsa_iterate_agents(&HSAContext::find_gpu, &agents);
+        printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+        printf("Num of GPUS found : %d\n", agents.size());
+        printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
         STATUS_CHECK(status, __LINE__);
 
         // Iterate over agents to find out the first cpu device as host
