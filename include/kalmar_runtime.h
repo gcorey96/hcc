@@ -497,6 +497,7 @@ private:
     KalmarDevice* get_default_dev() {
         if (!def) {
             if (Devices.size() <= 1) {
+                printf("testing\n");
                 fprintf(stderr, "There is no device can be used to do the computation\n");
                 exit(-1);
             }
