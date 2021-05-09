@@ -1323,10 +1323,10 @@ public:
                     foundFirstValidOp = true;
                 }
                 // wait on valid futures only
-                std::shared_future<void>* future = asyncOp->getFuture();
-                if (future && future->valid()) {
-                    future->wait();
-                }
+                //std::shared_future<void>* future = asyncOp->getFuture();
+                //if (future && future->valid()) {
+                //    future->wait();
+                //}
             }
         }
         // clear async operations table
@@ -1438,7 +1438,8 @@ public:
         auto&& dependentAsyncOpVector = bufferKernelMap[buffer];
         for (int i = 0; i < dependentAsyncOpVector.size(); ++i) {
           auto dependentAsyncOp = dependentAsyncOpVector[i];
-          if (!dependentAsyncOp.expired()) {
+          auto dependentAsyncOpPointer = dependentAsyncOp.lock();
+          if (dependentAsyncOpPointer) {
             auto dependentAsyncOpPointer = dependentAsyncOp.lock();
             // wait on valid futures only
             std::shared_future<void>* future = dependentAsyncOpPointer->getFuture();
