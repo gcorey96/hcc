@@ -537,7 +537,7 @@ public:
 
     /// get device from path
     KalmarDevice* getDevice(std::wstring path = L"") {
-        std::wcout << path;
+        printf("%ls\n", path.c_str());
         printf("getDevice\n");
         if (path == L"default" || path == L"")
             printf("path is default or null\n");
