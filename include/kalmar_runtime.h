@@ -533,11 +533,14 @@ public:
 
     /// get auto selection queue
     std::shared_ptr<KalmarQueue> auto_select() {
+        printf("auto select\n");
         return get_default_dev()->get_default_queue();
     }
 
     /// get device from path
     KalmarDevice* getDevice(std::wstring path = L"") {
+        printf("getDevice\n");
+        wprintf(L"%s\n", path.c_str());
         if (path == L"default" || path == L"")
             return get_default_dev();
         auto result = std::find_if(std::begin(Devices), std::end(Devices),
@@ -575,6 +578,7 @@ extern void PushArgPtr(void *, int, size_t, const void *);
 } // namespace CLAMP
 
 static inline const std::shared_ptr<KalmarQueue> get_cpu_queue() {
+    printf("get_cpu_queue\n");
     static auto cpu_queue = getContext()->getDevice(L"cpu")->get_default_queue();
     return cpu_queue;
 }

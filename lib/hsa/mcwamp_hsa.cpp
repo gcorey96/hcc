@@ -3086,6 +3086,8 @@ public:
     std::ostream &getHccProfileStream() const { return *hccProfileStream; };
 
     HSAContext() : KalmarContext(), signalPool(), signalPoolFlag(), signalCursor(0), signalPoolMutex() {
+        printf("HSAContext\n");
+
         host.handle = (uint64_t)-1;
 
         ReadHccEnv();
