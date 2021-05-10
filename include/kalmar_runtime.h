@@ -497,7 +497,6 @@ private:
     KalmarDevice* get_default_dev() {
         if (!def) {
             if (Devices.size() <= 1) {
-                printf("testing\n");
                 fprintf(stderr, "There is no device can be used to do the computation\n");
                 exit(-1);
             }
@@ -533,15 +532,15 @@ public:
 
     /// get auto selection queue
     std::shared_ptr<KalmarQueue> auto_select() {
-        printf("auto select\n");
         return get_default_dev()->get_default_queue();
     }
 
     /// get device from path
     KalmarDevice* getDevice(std::wstring path = L"") {
+        std::wcout << path;
         printf("getDevice\n");
-        wprintf(L"%s\n", path.c_str());
         if (path == L"default" || path == L"")
+            printf("path is default or null\n");
             return get_default_dev();
         auto result = std::find_if(std::begin(Devices), std::end(Devices),
                                    [&] (const KalmarDevice* dev)
@@ -549,6 +548,7 @@ public:
         if (result != std::end(Devices))
             return *result;
         else
+            printf("path is not default but can't find\n");
             return get_default_dev();
     }
 
@@ -578,7 +578,6 @@ extern void PushArgPtr(void *, int, size_t, const void *);
 } // namespace CLAMP
 
 static inline const std::shared_ptr<KalmarQueue> get_cpu_queue() {
-    printf("get_cpu_queue\n");
     static auto cpu_queue = getContext()->getDevice(L"cpu")->get_default_queue();
     return cpu_queue;
 }
