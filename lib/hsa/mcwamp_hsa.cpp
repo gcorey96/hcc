@@ -3094,21 +3094,27 @@ public:
 
         // initialize HSA runtime
         
+        fprintf(stderr, "Read HCC ENV\n");
+
         DBOUT(DB_INIT,"HSAContext::HSAContext(): init HSA runtime");
 
         hsa_status_t status;
+
+        fprintf(stderr, "Starting HSA INIT\n");
         status = hsa_init();
-        if (status != HSA_STATUS_SUCCESS)
-          return;
+        if (status != HSA_STATUS_SUCCESS){
+            fprintf(stderr, "INIT FAILED\n");
+            return;
+        }
 
         STATUS_CHECK(status, __LINE__);
 
         // Iterate over the agents to find out gpu device
         std::vector<hsa_agent_t> agents;
         status = hsa_iterate_agents(&HSAContext::find_gpu, &agents);
-        printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-        printf("Num of GPUS found : %d\n", agents.size());
-        printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+        fprintf(stderr, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+        fprintf(stderr, "Num of GPUS found : %d\n", agents.size());
+        fprintf(stderr, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
         STATUS_CHECK(status, __LINE__);
 
         // Iterate over agents to find out the first cpu device as host
