@@ -3019,14 +3019,14 @@ private:
         std::vector<hsa_agent_t>* pAgents = nullptr;
 
         if (data == nullptr) {
-            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-            printf("DATA is NULL\n");
-            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+            fprintf(stderr, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+            fprintf(stderr, "DATA is NULL\n");
+            fprintf(stderr, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
             return HSA_STATUS_ERROR_INVALID_ARGUMENT;
         } else {
-            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-            printf("Making pAgent\n");
-            printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+            fprintf(stderr, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+            fprintf(stderr, "Making pAgent\n");
+            fprintf(stderr, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
             pAgents = static_cast<std::vector<hsa_agent_t>*>(data);
         }
 
@@ -3054,9 +3054,9 @@ private:
             }
         }
 
-        printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-        printf("%d, %d\n", device_type, HSA_DEVICE_TYPE_GPU);
-        printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+        fprintf(stderr, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+        fprintf(stderr, "%d, %d\n", device_type, HSA_DEVICE_TYPE_GPU);
+        fprintf(stderr, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
         if (device_type == HSA_DEVICE_TYPE_GPU)  {
             pAgents->push_back(agent);
         }
@@ -3086,7 +3086,7 @@ public:
     std::ostream &getHccProfileStream() const { return *hccProfileStream; };
 
     HSAContext() : KalmarContext(), signalPool(), signalPoolFlag(), signalCursor(0), signalPoolMutex() {
-        printf("HSAContext\n");
+        fprintf(stderr, "HSAContext\n");
 
         host.handle = (uint64_t)-1;
 
