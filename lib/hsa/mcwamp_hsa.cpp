@@ -3103,6 +3103,7 @@ public:
         fprintf(stderr, "Starting HSA INIT\n");
         status = hsa_init();
         if (status != HSA_STATUS_SUCCESS){
+            fprintf(stderr, "%x\n", status);
             fprintf(stderr, "INIT FAILED\n");
             return;
         }
